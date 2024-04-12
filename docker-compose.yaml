@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    container_name: mongodb
+    build: .
+    volumes:
+      - ./init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: postsdb
+
+    # posts-service:
+      #build:
+      # context: .
+      #dockerfile: Dockerfile
+    #container_name: posts-service
+        #ports:
+      #- "8080:8080"
+        #depends_on:
+      #- mongodb
+      #environment:
+      #SPRING_DATA_MONGODB_URI: mongodb://admin:admin@mongodb:27017/postsdb
+      # Add other environment variables for your application if needed
+
+volumes:
+  mongodb_data:
+    driver: local
